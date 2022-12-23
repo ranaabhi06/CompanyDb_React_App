@@ -6,8 +6,8 @@ import Records from "./components/Records";
 import Edit from "./components/Edit";
 
 function App() {
-  const [department, setDepartment] = useState({});
-  const [designation, setDesignation] = useState({});
+  const [formValues, setDepartment] = useState({});
+  const [desValue, setDesignation] = useState({});
   const [stateValue, setStateValue] = useState({});
   const [districtValue, setDistValue] = useState({});
 
@@ -19,16 +19,19 @@ function App() {
   const [dbData, setDbData] = useState([]);
 
   const [clearStates, setClearStates] = useState(false);
-
+const [genderValue,setGenderValue]=useState({})
+const[personValue,setPersonValue]=useState({})
   const [finalData, setFinalData] = useState({
-    department: [],
-    designation: [],
+    formValues: [],
+    desValue: [],
     stateValue: [],
     districtValue: [],
     name:[],
     dob:[],
     organisation:[],
-    doj:[]
+    doj:[],
+    genderValue:[],
+    personValue:[],
   });
 
   // create new state for receiving data from GET request
@@ -53,16 +56,18 @@ function App() {
   useEffect(() => {
     setFinalData({
       ...finalData,
-      department,
-      designation,
+      formValues,
+      desValue,
       stateValue,
       districtValue,
       name,
       dob,
       organisation,
-      doj
+      doj,
+      genderValue,
+      personValue,
     });
-  }, [department, designation, stateValue, districtValue,name,dob,organisation,doj]);
+  }, [formValues, desValue, stateValue, districtValue,name,dob,organisation,doj,genderValue,personValue]);
 
   const handleDepartment = (selected) => {
     // console.log(selected);
@@ -100,7 +105,15 @@ function App() {
     // console.log(doj);
     setDoj({doj:doj})
   }
+const handleGender=(g)=>{
+  console.log(g)
+setGenderValue({gend:g})
+}
 
+const handlePerson=(p)=>{
+  console.log(p)
+setPersonValue({pers:p})
+}
 
 
   const getData = () => {
@@ -117,7 +130,7 @@ function App() {
     return await axios.get(`http://localhost:5000/data${id}`);
     // setDbData(res.data);
   };
-  // console.log(dbData);
+  console.log(dbData);
 
   const postToDB = async () => {
     axios.get("http://localhost:5000/data").then((res) => {
@@ -125,7 +138,7 @@ function App() {
     });
 
     // console.log(finalData);
-    if (!finalData.department) return;
+    if (!finalData.formValues) return;
 
     let postDb = await axios.post("http://localhost:5000/data", {
       ...finalData,
@@ -147,7 +160,7 @@ function App() {
     // console.log(del.data);
   };
 
-  idsToDelete.forEach(deleteData);
+  idsToDelete.forEach(deleteData());
 
   //for edit
 
@@ -163,7 +176,7 @@ function App() {
 
   const handleSetIdsToDelete = (ids) => {
     // console.log(ids);
-    setIdsToDelete((pre) => [...pre, ids[0]]);
+    (setIdsToDelete)((pre) => [...pre, ids[0]]);
     getData();
   };
   // console.log(idsToDelete);
@@ -187,6 +200,8 @@ function App() {
         onOrgani={handleOrga}
         onDOJ={handleDoj}
         postToDB={postToDB}
+        onGender={handleGender}
+        onPerson={handlePerson}
         
       />
       <Edit
@@ -214,6 +229,8 @@ function App() {
         onDOB={handleDob}
         onOrgani={handleOrga}
         onDOJ={handleDoj}
+        onGender={handleGender}
+        onPerson={handlePerson}
       />
       <input
         type="button"

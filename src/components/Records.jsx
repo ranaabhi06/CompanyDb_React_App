@@ -63,10 +63,10 @@ function Records(props) {
                 {info.doj.doj}
                 <br />
                 <label htmlFor=""><em><b>Gender:  &nbsp; </b></em></label>
-                
+                {/* {info.genderValue.gend} */}
                 <br />
                 <label htmlFor=""><em><b>Are You Ex-Employee: &nbsp; </b></em></label>
-                
+                {/* {info.personValue.pers} */}
                 <br />
                 <label htmlFor=""><em><b>Fav_Editor:  &nbsp;</b></em> </label>
               

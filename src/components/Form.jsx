@@ -11,7 +11,30 @@ let Dropdown = (props) => {
   const [selectedDistrict, setSelectedDistrict] = useState("");
   const [filtDist, setfiltDist] = useState([]);
 
-  // console.log(props.onEditID);
+
+ 
+ const [acceptGenderData, setAcceptGenderData] = useState("");
+  const [acceptPersonData, setAcceptPersonData] = useState("");
+
+
+//   // console.log(props.onEditID);
+
+
+
+  const onRadioGender = (event) => {
+
+    setAcceptGenderData(event.target.value);
+    props.onGender(acceptGenderData)
+
+  };
+  console.log(acceptGenderData)
+  const onRadioPerson = (event) => {
+
+    setAcceptPersonData(event.target.value);
+    props.onPerson(acceptPersonData)
+
+  };
+  console.log(acceptPersonData)
 
   //  let editArray =[];
   //  editArray=props.onEditID;
@@ -130,25 +153,70 @@ let Dropdown = (props) => {
             </tr>
             <tr>
               <td>
-                <label htmlFor="">Gender</label>
+                <label className="lableCss" htmlFor="">
+                  Gender
+                </label>
               </td>
+
               <td>
-                <input type="radio" name="" id="" />
+                <input
+                  type="radio"
+                  value="Male"
+                  name="Gender"
+                  onChange={
+                    onRadioGender
+                  }
+                  
+                />
                 Male
-                <input type="radio" name="" id="" />
+                <input
+                  type="radio"
+                  value="Female"
+                  name="Gender"
+                  onChange={
+                    onRadioGender         }
+                  
+                />
                 Female
-                <input type="radio" name="" id="" />
+                <input
+                  type="radio"
+                  value="Other"
+                  name="Gender"
+                  onChange={
+                    onRadioGender
+                  }
+                  
+                />
                 Other
               </td>
             </tr>
             <tr>
               <td>
-                <label htmlFor="">Are you Ex-Employee</label>
+                <label className="lableCss" htmlFor="">
+                  Are you Ex-Employee
+                </label>
               </td>
+
               <td>
-                <input type="radio" name="" id="" />
+                <input
+                  type="radio"
+                  name="Person"
+                  value="Yes"
+                  onChange={
+                    onRadioPerson
+                  }
+                  id=""
+                />
                 Yes
-                <input type="radio" name="" id="" />
+                <input
+                  type="radio"
+                  name="Person"
+                  value="No"
+                  onChange={
+                    onRadioPerson
+                  }
+                  
+                />
                 No
               </td>
             </tr>
